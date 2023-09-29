@@ -7,7 +7,7 @@ port of https://github.com/google/android-arscblamer
  * .net 7 
  *  netstandard 2.0
 
-## java version(TODO)
+## java version
 
 * java 21
 
