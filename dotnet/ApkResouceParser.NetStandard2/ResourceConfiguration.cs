@@ -22,6 +22,7 @@
  */
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text;
 
 namespace ApkResourceParser
 {
@@ -436,6 +437,52 @@ namespace ApkResourceParser
         public byte[] unknown()
         {
             return _unknown;
+        }
+        
+        public string languageString()
+        {
+            return unpackLanguage();
+        }
+
+        private string unpackLanguage()
+        {
+            return unpackLanguage(language());
+        }
+
+        public string unpackLanguage(byte[] language)
+        {
+            return unpackLanguageOrRegion(language, 0x61);
+        }
+
+        /** Returns {@link #region} as an unpacked string representation. */
+        public string regionString()
+        {
+            return unpackRegion();
+        }
+
+        private string unpackRegion()
+        {
+            return unpackLanguageOrRegion(region(), 0x30);
+        }
+
+        private string unpackLanguageOrRegion(byte[] value, byte baseValue)
+        {
+            Preconditions.checkState(value.Length == 2, "Language or region value must be 2 bytes.");
+            if (value[0] == 0 && value[1] == 0)
+            {
+                return "";
+            }
+
+            if ((value[0] & 0x80) != 0)
+            {
+                byte[] result = new byte[3];
+                result[0] = (byte)(baseValue + (value[1] & 0x1F));
+                result[1] = (byte)(baseValue + ((value[1] & 0xE0) >> 5) + ((value[0] & 0x03) << 3));
+                result[2] = (byte)(baseValue + ((value[0] & 0x7C) >> 2));
+                return Encoding.ASCII.GetString(result);
+            }
+
+            return Encoding.ASCII.GetString(value);
         }
 
         /// <summary>
