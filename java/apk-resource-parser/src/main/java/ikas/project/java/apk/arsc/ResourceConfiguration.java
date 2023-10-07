@@ -497,6 +497,16 @@ public class ResourceConfiguration {
         return unpackLanguage(language());
     }
 
+    /** Returns {@link #region} as an unpacked string representation. */
+    public String regionString()
+    {
+        return unpackRegion();
+    }
+
+    private String unpackRegion()
+    {
+        return unpackLanguageOrRegion(region(), 0x30);
+    }
 
     public int size() {
         return size;
