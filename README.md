@@ -2,6 +2,8 @@
 
 port of https://github.com/google/android-arscblamer
 
+https://android.googlesource.com/platform/tools/base/+/mirror-goog-studio-main/apkparser/binary-resources/src/main/java/com/google/devrel/gmscore/tools/apk/arsc
+
 ## .net version
 
  * .net 7 
@@ -10,6 +12,9 @@ port of https://github.com/google/android-arscblamer
 ## java version
 
 * java 21
+
+## 
+https://android.googlesource.com/platform/tools/base/+/mirror-goog-studio-main/manifest-parser/src/main/java/com/android/tools/manifest/parser
 
 # license
 
